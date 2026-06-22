@@ -1,58 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LAPORIN - Platform Pelaporan Masyarakat 🚀
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![LAPORIN Hero Banner](https://via.placeholder.com/1200x400/0f172a/ffffff?text=LAPORIN+-+Suara+Anda+Membangun+Kota)
 
-## About Laravel
+**LAPORIN** adalah aplikasi berbasis web modern yang dirancang untuk menjembatani komunikasi antara warga dan pemerintah atau pihak berwenang. Melalui aplikasi ini, warga dapat melaporkan berbagai masalah lingkungan seperti kerusakan infrastruktur, masalah kebersihan, hingga fasilitas umum secara mudah, interaktif, dan transparan.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Fitur Utama
+1. **Sistem Autentikasi**: Login dan Registrasi aman untuk Warga dan Admin (Berbasis Laravel Breeze).
+2. **Geolokasi Terintegrasi**: Warga dapat menandai titik lokasi masalah secara presisi menggunakan peta interaktif (Leaflet.js & OpenStreetMap).
+3. **Manajemen Laporan Interaktif**:
+   - Status laporan *real-time* (Menunggu, Diproses, Selesai, Ditolak).
+   - Kolom diskusi/tanggapan dua arah antara Warga dan Admin.
+4. **Dashboard Analitik Admin**: Visualisasi data laporan masuk berdasarkan kategori dan tren bulanan menggunakan Recharts.
+5. **Notifikasi *In-App***: Pembaruan instan bagi warga jika laporannya ditanggapi atau statusnya berubah.
+6. **Pengaturan Aplikasi Dinamis (CMS)**: Admin dapat mengubah identitas aplikasi (nama, logo), teks halaman depan, syarat & ketentuan, hingga menyalakan Mode Pemeliharaan (*Maintenance Mode*) tanpa menyentuh kode.
+7. **Dukungan Dark Mode**: Tampilan UI yang menyesuaikan dengan preferensi sistem pengguna.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Teknologi yang Digunakan
+Aplikasi ini dibangun menggunakan arsitektur *Monolith* dengan performa SPA (*Single Page Application*) berkat *stack* teknologi:
+- **Backend**: [Laravel 11](https://laravel.com/) (PHP)
+- **Frontend**: [React.js](https://reactjs.org/) dengan TypeScript
+- **Penghubung**: [Inertia.js](https://inertiajs.com/) (Menghilangkan kebutuhan pembuatan REST API manual)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & Komponen [Shadcn UI](https://ui.shadcn.com/)
+- **Database**: MySQL
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Panduan Instalasi (Development)
 
-## Learning Laravel
+Untuk menjalankan proyek ini di mesin lokal Anda, ikuti langkah-langkah berikut:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Prasyarat
+- PHP 8.2 atau lebih baru
+- Composer
+- Node.js (v18+) & NPM
+- MySQL Server
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Langkah-langkah
+1. **Clone repositori ini**
+   ```bash
+   git clone git@github.com:riyadhi-firman/LAPORIN.git
+   cd LAPORIN
+   ```
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+2. **Instal dependensi Backend (PHP)**
+   ```bash
+   composer install
+   ```
 
-## Agentic Development
+3. **Instal dependensi Frontend (Node)**
+   ```bash
+   npm install
+   ```
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+4. **Konfigurasi Environment**
+   Salin file `.env.example` menjadi `.env` lalu sesuaikan kredensial koneksi *database* Anda.
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-```bash
-composer require laravel/boost --dev
+5. **Migrasi dan Seeding Database**
+   Perintah ini akan membuat tabel-tabel sekaligus mengisi data awal (seperti Akun Admin *default*).
+   ```bash
+   php artisan migrate --seed
+   ```
 
-php artisan boost:install
-```
+6. **Buat Tautan Storage (Untuk Upload Foto)**
+   ```bash
+   php artisan storage:link
+   ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+7. **Jalankan Aplikasi**
+   Buka dua jendela terminal terpisah dan jalankan kedua perintah berikut:
+   
+   Terminal 1 (Menjalankan server PHP):
+   ```bash
+   php artisan serve
+   ```
+   
+   Terminal 2 (Men-compile aset frontend):
+   ```bash
+   npm run dev
+   ```
 
-## Contributing
+8. Buka `http://localhost:8000` di *browser* Anda.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Akses Default Admin
+*(Pastikan Anda telah menjalankan perintah seed `php artisan migrate --seed`)*
+- **Email:** `admin@laporin.com`
+- **Password:** `password`
 
-## Code of Conduct
+## 📖 Dokumentasi Lengkap
+Dokumen rancangan sistem (Bab 1, Bab 3, dan Diagram UML) tersedia di dalam folder `/docs`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+*Dibuat untuk mempermudah pelaporan warga demi lingkungan yang lebih baik.*
